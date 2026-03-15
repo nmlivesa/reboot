@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://doi6ay4ibgdnk"]
+
+[ext_resource type="Script" uid="uid://d0i0mictgvdxt" path="res://Scripts/kinematic_player.gd" id="1_opfon"]
+[ext_resource type="Texture2D" uid="uid://b60aapvn1jyat" path="res://Art/Character Art/Running%20Pose%201.png" id="2_sgwby"]
+[ext_resource type="Texture2D" uid="uid://bomnmcm4i2gfu" path="res://Art/Character Art/Damaged/Death%20Pose.png" id="2_xolxe"]
+[ext_resource type="Texture2D" uid="uid://447nbpdbqnvb" path="res://Art/Character Art/Running%20Pose%202.png" id="3_m0fkt"]
+[ext_resource type="Texture2D" uid="uid://bpefv7ajlwf0v" path="res://Art/Character Art/Standing%20Pose.png" id="4_3hj1c"]
+[ext_resource type="Script" uid="uid://csb0blgn4qvo4" path="res://Scripts/grapple_controller.gd" id="5_sgwby"]
+[ext_resource type="Texture2D" uid="uid://bqn4qp6s685fu" path="res://Art/Character Art/Damaged/Shocked%20Blue%20Pose.png" id="6_0lqek"]
+[ext_resource type="Texture2D" uid="uid://bvesqo6gxf8rm" path="res://Art/Vines/Vine%20Asset.png" id="6_m0fkt"]
+[ext_resource type="Script" uid="uid://dbs7rdmehdlas" path="res://Scripts/grapple_controller_mech.gd" id="7_3hj1c"]
+[ext_resource type="Texture2D" uid="uid://fn5x2jh0oleq" path="res://Art/Character Art/Damaged/Shocked%20Pose.png" id="7_nqc14"]
+[ext_resource type="Texture2D" uid="uid://cou7bsb71ctdj" path="res://Art/Character Art/Grapple/Grapple%20Arm.png" id="8_1tiax"]
+[ext_resource type="Texture2D" uid="uid://b64u8615kvn2y" path="res://Art/Character Art/Grapple/Grapple%20Hand%20Open.png" id="9_75od3"]
+
+[sub_resource type="Curve" id="Curve_ln7xp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cq27"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xolxe")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3hj1c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sgwby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m0fkt")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0lqek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nqc14")
+}],
+"loop": true,
+"name": &"shocked",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1tiax"]
+radius = 26.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbhti"]
+radius = 21.0
+height = 62.0
+
+[node name="Kinematic_Player" type="CharacterBody2D" unique_id=701945916]
+z_index = 5
+collision_layer = 2
+script = ExtResource("1_opfon")
+move_accel_curve = SubResource("Curve_ln7xp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1395660460]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_1cq27")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=293606323]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_1tiax")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=135702169]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1525570460]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_gbhti")
+debug_color = Color(0.94179225, 0.11973024, 0.5276754, 0.41960785)
+
+[node name="GrappleControllerVine" type="Node2D" parent="." unique_id=1647143207]
+script = ExtResource("5_sgwby")
+stiffness = 20.0
+damping = 10.0
+max_displacement = 150
+metadata/_edit_group_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="GrappleControllerVine" unique_id=788807662]
+target_position = Vector2(900, 0)
+
+[node name="Line2D" type="Line2D" parent="GrappleControllerVine" unique_id=1211447301]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.48093355, 0.99999994, 0.69660467, 1)
+texture = ExtResource("6_m0fkt")
+texture_mode = 1
+
+[node name="VineCooldownTimer" type="Timer" parent="GrappleControllerVine" unique_id=696686382]
+one_shot = true
+
+[node name="GrappleControllerMech" type="Node2D" parent="." unique_id=1345887965]
+script = ExtResource("7_3hj1c")
+rest_length = 0.5
+stiffness = 3000.0
+damping = 4.0
+cooldown = 2.0
+metadata/_edit_group_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="GrappleControllerMech" unique_id=1392404649]
+target_position = Vector2(400, 0)
+
+[node name="Line2D" type="Line2D" parent="GrappleControllerMech" unique_id=1701191075]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+texture = ExtResource("8_1tiax")
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="GrappleControllerMech" unique_id=774207635]
+z_index = 6
+z_as_relative = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_75od3")
+
+[node name="GrappleCooldownTimer" type="Timer" parent="GrappleControllerMech" unique_id=1812923953]
+one_shot = true
+
+[node name="GrappleUnlatchTimer" type="Timer" parent="GrappleControllerMech" unique_id=1579783862]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="GrappleControllerVine/VineCooldownTimer" to="GrappleControllerVine" method="_on_vine_cooldown_timeout"]
+[connection signal="timeout" from="GrappleControllerMech/GrappleCooldownTimer" to="GrappleControllerMech" method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="GrappleControllerMech/GrappleUnlatchTimer" to="GrappleControllerMech" method="_on_unlatch_timer_timeout"]

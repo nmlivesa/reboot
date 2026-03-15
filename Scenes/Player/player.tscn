@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dhk3qjo65qrqu"]
+
+[ext_resource type="Script" uid="uid://cj54ke4icwul8" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://xcs2lrsc61c1" path="res://Scenes/state_machine.gd" id="2_6t5aa"]
+
+[node name="player" type="CharacterBody2D" unique_id=1023718906]
+script = ExtResource("1_cvnsp")
+
+[node name="animations" type="AnimatedSprite2D" parent="." unique_id=1390806373]
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=195532125]
+
+[node name="state_machine" type="Node" parent="." unique_id=999904568]
+script = ExtResource("2_6t5aa")
+
+[node name="idle" type="Node" parent="state_machine" unique_id=1818289422]
+
+[node name="jump" type="Node" parent="state_machine" unique_id=1688271183]
+
+[node name="fall" type="Node" parent="state_machine" unique_id=534947619]
+
+[node name="move" type="Node" parent="state_machine" unique_id=536212216]

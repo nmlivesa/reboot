@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://nur88uw7pki0"]
+
+[ext_resource type="Script" uid="uid://dxy7rcoefdr1l" path="res://Scripts/hud.gd" id="1_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://da4v2on3gncqv" path="res://Art/Backgrounds/Main Title.png" id="1_37p78"]
+
+[node name="HUD" type="CanvasLayer" unique_id=427176322]
+script = ExtResource("1_8sq4i")
+
+[node name="Message" type="Label" parent="." unique_id=1091484463]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 48.5
+offset_right = 20.0
+offset_bottom = 71.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="." unique_id=179344882]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -148.0
+offset_right = 4.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start Game"
+
+[node name="MessageTimer" type="Timer" parent="." unique_id=995623829]
+one_shot = true
+
+[node name="Title" type="TextureRect" parent="." unique_id=763878019]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_37p78")
+expand_mode = 1
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
