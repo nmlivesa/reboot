@@ -93,7 +93,7 @@ debug_color = Color(0.94179225, 0.11973024, 0.5276754, 0.41960785)
 [node name="GrappleControllerVine" type="Node2D" parent="." unique_id=1647143207]
 script = ExtResource("5_sgwby")
 stiffness = 20.0
-damping = 10.0
+damping = 50.0
 max_displacement = 150
 metadata/_edit_group_ = true
 
@@ -115,7 +115,7 @@ script = ExtResource("7_3hj1c")
 rest_length = 0.5
 stiffness = 3000.0
 damping = 4.0
-cooldown = 2.0
+cooldown = 3.0
 metadata/_edit_group_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="GrappleControllerMech" unique_id=1392404649]

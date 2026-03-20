@@ -1,22 +1,84 @@
 [gd_scene format=3 uid="uid://dhk3qjo65qrqu"]
 
 [ext_resource type="Script" uid="uid://cj54ke4icwul8" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Script" uid="uid://xcs2lrsc61c1" path="res://Scenes/state_machine.gd" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://ba64sacs0ixbq" path="res://Scenes/Utility/state_machine.tscn" id="2_a3d8c"]
+[ext_resource type="Texture2D" uid="uid://bpefv7ajlwf0v" path="res://Art/Character Art/Standing%20Pose.png" id="2_gk6dx"]
+[ext_resource type="Script" uid="uid://c6qadlkbw0h55" path="res://Scripts/States/jump_state.gd" id="3_dd0ac"]
+[ext_resource type="Texture2D" uid="uid://b60aapvn1jyat" path="res://Art/Character Art/Running%20Pose%201.png" id="3_jhyir"]
+[ext_resource type="Script" uid="uid://xu8s4x3wpfqa" path="res://Scripts/States/fall_state.gd" id="4_0u5uq"]
+[ext_resource type="Texture2D" uid="uid://447nbpdbqnvb" path="res://Art/Character Art/Running%20Pose%202.png" id="4_74mp2"]
+[ext_resource type="Script" uid="uid://j8wmtqjkc5mx" path="res://Scripts/States/idle_state.gd" id="5_jlvik"]
+[ext_resource type="Script" uid="uid://bx5a3pitht0bx" path="res://Scripts/States/move_state.gd" id="6_gk6dx"]
+[ext_resource type="Script" uid="uid://bfgk3rbip1ppr" path="res://Scenes/Player/move_component.gd" id="10_jhyir"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpcdj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gk6dx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jhyir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_74mp2")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtuoh"]
+radius = 26.0
+height = 84.0
 
 [node name="player" type="CharacterBody2D" unique_id=1023718906]
+collision_layer = 2
 script = ExtResource("1_cvnsp")
 
 [node name="animations" type="AnimatedSprite2D" parent="." unique_id=1390806373]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_xpcdj")
+animation = &"idle"
+frame_progress = 0.39210403
 
 [node name="collision" type="CollisionShape2D" parent="." unique_id=195532125]
+shape = SubResource("CapsuleShape2D_mtuoh")
 
-[node name="state_machine" type="Node" parent="." unique_id=999904568]
-script = ExtResource("2_6t5aa")
+[node name="state_machine" parent="." unique_id=1000964424 node_paths=PackedStringArray("starting_state") instance=ExtResource("2_a3d8c")]
+starting_state = NodePath("Idle")
 
-[node name="idle" type="Node" parent="state_machine" unique_id=1818289422]
+[node name="Jump" type="Node" parent="state_machine" unique_id=993227568 node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
+script = ExtResource("3_dd0ac")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+animation_name = "idle"
 
-[node name="jump" type="Node" parent="state_machine" unique_id=1688271183]
+[node name="Fall" type="Node" parent="state_machine" unique_id=1743367781 node_paths=PackedStringArray("idle_state", "move_state")]
+script = ExtResource("4_0u5uq")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+animation_name = "idle"
 
-[node name="fall" type="Node" parent="state_machine" unique_id=534947619]
+[node name="Idle" type="Node" parent="state_machine" unique_id=42563731 node_paths=PackedStringArray("fall_state", "jump_state", "move_state")]
+script = ExtResource("5_jlvik")
+fall_state = NodePath("../Fall")
+jump_state = NodePath("../Jump")
+move_state = NodePath("../Move")
+animation_name = "idle"
 
-[node name="move" type="Node" parent="state_machine" unique_id=536212216]
+[node name="Move" type="Node" parent="state_machine" unique_id=179228498 node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
+script = ExtResource("6_gk6dx")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+animation_name = "move"
+
+[node name="move_component" type="Node" parent="." unique_id=415871162]
+script = ExtResource("10_jhyir")

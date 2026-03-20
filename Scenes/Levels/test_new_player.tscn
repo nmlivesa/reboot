@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c3mt33d30m22k"]
+
+[ext_resource type="PackedScene" uid="uid://jfvqkoyo12rg" path="res://Scenes/Levels/tiles.tscn" id="1_hbkfp"]
+[ext_resource type="PackedScene" uid="uid://ceqjr0nxyst6a" path="res://Scenes/camera_director.tscn" id="2_u6n63"]
+[ext_resource type="PackedScene" uid="uid://dhk3qjo65qrqu" path="res://Scenes/Player/player.tscn" id="3_yyyel"]
+
+[node name="Test_New_Player" type="Node2D" unique_id=1490558624]
+
+[node name="TILES" parent="." unique_id=1827673789 instance=ExtResource("1_hbkfp")]
+
+[node name="Camera_Director" parent="." unique_id=1675280196 node_paths=PackedStringArray("cam", "target") instance=ExtResource("2_u6n63")]
+cam = NodePath("../Camera2D")
+target = NodePath("../player")
+
+[node name="player" parent="." unique_id=1023718906 instance=ExtResource("3_yyyel")]
+position = Vector2(213, -80)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=539195559]
