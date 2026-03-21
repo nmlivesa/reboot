@@ -24,7 +24,8 @@ func process_physics(delta: float) -> State:
 	
 	if movement != 0:
 		parent.animations.flip_h = movement < 0
-	parent.velocity.x = movement
+		parent.velocity.x += movement * 0.5 * delta
+	
 	parent.move_and_slide()
 	
 	if parent.is_on_floor():

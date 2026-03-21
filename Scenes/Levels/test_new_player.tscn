@@ -6,8 +6,6 @@
 
 [node name="Test_New_Player" type="Node2D" unique_id=1490558624]
 
-[node name="TILES" parent="." unique_id=1827673789 instance=ExtResource("1_hbkfp")]
-
 [node name="Camera_Director" parent="." unique_id=1675280196 node_paths=PackedStringArray("cam", "target") instance=ExtResource("2_u6n63")]
 cam = NodePath("../Camera2D")
 target = NodePath("../player")
@@ -16,3 +14,5 @@ target = NodePath("../player")
 position = Vector2(213, -80)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=539195559]
+
+[node name="TILES" parent="." unique_id=1827673789 instance=ExtResource("1_hbkfp")]

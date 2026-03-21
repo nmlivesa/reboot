@@ -9,7 +9,6 @@ var move_state: State
 
 func enter() -> void:
 	super()
-	parent.velocity.x = 0
 
 func process_input(event: InputEvent) -> State:
 	if get_jump() and parent.is_on_floor():
@@ -20,6 +19,7 @@ func process_input(event: InputEvent) -> State:
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y += gravity * delta
+	parent.velocity.x = lerp(parent.velocity.x, 0.0, acceleration)
 	parent.move_and_slide()
 	
 	if !parent.is_on_floor():

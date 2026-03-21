@@ -1,21 +1,17 @@
 [gd_scene format=3 uid="uid://doi6ay4ibgdnk"]
 
-[ext_resource type="Script" uid="uid://d0i0mictgvdxt" path="res://Scripts/kinematic_player.gd" id="1_opfon"]
+[ext_resource type="Script" uid="uid://d0i0mictgvdxt" path="res://Scripts/Kinematic_Player(old)/kinematic_player.gd" id="1_opfon"]
 [ext_resource type="Texture2D" uid="uid://b60aapvn1jyat" path="res://Art/Character Art/Running%20Pose%201.png" id="2_sgwby"]
 [ext_resource type="Texture2D" uid="uid://bomnmcm4i2gfu" path="res://Art/Character Art/Damaged/Death%20Pose.png" id="2_xolxe"]
 [ext_resource type="Texture2D" uid="uid://447nbpdbqnvb" path="res://Art/Character Art/Running%20Pose%202.png" id="3_m0fkt"]
 [ext_resource type="Texture2D" uid="uid://bpefv7ajlwf0v" path="res://Art/Character Art/Standing%20Pose.png" id="4_3hj1c"]
-[ext_resource type="Script" uid="uid://csb0blgn4qvo4" path="res://Scripts/grapple_controller.gd" id="5_sgwby"]
+[ext_resource type="Script" uid="uid://csb0blgn4qvo4" path="res://Scripts/Kinematic_Player(old)/grapple_controller.gd" id="5_sgwby"]
 [ext_resource type="Texture2D" uid="uid://bqn4qp6s685fu" path="res://Art/Character Art/Damaged/Shocked%20Blue%20Pose.png" id="6_0lqek"]
 [ext_resource type="Texture2D" uid="uid://bvesqo6gxf8rm" path="res://Art/Vines/Vine%20Asset.png" id="6_m0fkt"]
-[ext_resource type="Script" uid="uid://dbs7rdmehdlas" path="res://Scripts/grapple_controller_mech.gd" id="7_3hj1c"]
+[ext_resource type="Script" uid="uid://dbs7rdmehdlas" path="res://Scripts/Kinematic_Player(old)/grapple_controller_mech.gd" id="7_3hj1c"]
 [ext_resource type="Texture2D" uid="uid://fn5x2jh0oleq" path="res://Art/Character Art/Damaged/Shocked%20Pose.png" id="7_nqc14"]
 [ext_resource type="Texture2D" uid="uid://cou7bsb71ctdj" path="res://Art/Character Art/Grapple/Grapple%20Arm.png" id="8_1tiax"]
 [ext_resource type="Texture2D" uid="uid://b64u8615kvn2y" path="res://Art/Character Art/Grapple/Grapple%20Hand%20Open.png" id="9_75od3"]
-
-[sub_resource type="Curve" id="Curve_ln7xp"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1cq27"]
 animations = [{
@@ -67,10 +63,8 @@ radius = 21.0
 height = 62.0
 
 [node name="Kinematic_Player" type="CharacterBody2D" unique_id=701945916]
-z_index = 5
 collision_layer = 2
 script = ExtResource("1_opfon")
-move_accel_curve = SubResource("Curve_ln7xp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1395660460]
 scale = Vector2(0.1, 0.1)

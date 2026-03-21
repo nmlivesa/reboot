@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dhvja2s2oo0xk"]
+
+[ext_resource type="Script" uid="uid://dnbknkylm4bgj" path="res://Scripts/Player_and_Abilities/mech_grapple.gd" id="1_6tfko"]
+[ext_resource type="Texture2D" uid="uid://cou7bsb71ctdj" path="res://Art/Character Art/Grapple/Grapple%20Arm.png" id="2_14wc1"]
+[ext_resource type="Texture2D" uid="uid://cxry6tqjfp57f" path="res://Art/Character Art/Grapple/Grapple%20Hand%20Grabbed.png" id="3_5k34y"]
+[ext_resource type="Texture2D" uid="uid://b64u8615kvn2y" path="res://Art/Character Art/Grapple/Grapple%20Hand%20Open.png" id="4_4xqve"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggc45"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5k34y")
+}],
+"loop": true,
+"name": &"Grabbed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4xqve")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}]
+
+[node name="mech_grapple" type="Node2D" unique_id=660355093]
+script = ExtResource("1_6tfko")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1622865982]
+target_position = Vector2(500, 0)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1633564048]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+texture = ExtResource("2_14wc1")
+texture_mode = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1453437273]
+z_index = 1
+z_as_relative = false
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ggc45")
+animation = &"Grabbed"
+
+[node name="GrappleCooldownTimer" type="Timer" parent="." unique_id=919000228]
+one_shot = true
+
+[node name="GrappleUnlatchTimer" type="Timer" parent="." unique_id=440170470]
+one_shot = true
+
+[connection signal="timeout" from="GrappleCooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="GrappleUnlatchTimer" to="." method="_on_unlatch_timer_timeout"]

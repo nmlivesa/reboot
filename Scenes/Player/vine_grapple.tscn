@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dfpsxiiqn4x87"]
+
+[ext_resource type="Script" uid="uid://cahffsjub8stw" path="res://Scripts/Player_and_Abilities/vine_grapple.gd" id="1_8bhvb"]
+[ext_resource type="Texture2D" uid="uid://bvesqo6gxf8rm" path="res://Art/Vines/Vine%20Asset.png" id="2_odlqk"]
+
+[node name="vine_grapple" type="Node2D" unique_id=1250737942]
+script = ExtResource("1_8bhvb")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=395480607]
+target_position = Vector2(800, 0)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1065521390]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+texture = ExtResource("2_odlqk")
+texture_mode = 1
+
+[node name="cooldown_timer" type="Timer" parent="." unique_id=1638255073]
+one_shot = true
+
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_vine_cooldown_timeout"]

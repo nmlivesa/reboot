@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhk3qjo65qrqu"]
 
-[ext_resource type="Script" uid="uid://cj54ke4icwul8" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://cj54ke4icwul8" path="res://Scripts/Player_and_Abilities/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://ba64sacs0ixbq" path="res://Scenes/Utility/state_machine.tscn" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://bpefv7ajlwf0v" path="res://Art/Character Art/Standing%20Pose.png" id="2_gk6dx"]
 [ext_resource type="Script" uid="uid://c6qadlkbw0h55" path="res://Scripts/States/jump_state.gd" id="3_dd0ac"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://j8wmtqjkc5mx" path="res://Scripts/States/idle_state.gd" id="5_jlvik"]
 [ext_resource type="Script" uid="uid://bx5a3pitht0bx" path="res://Scripts/States/move_state.gd" id="6_gk6dx"]
 [ext_resource type="Script" uid="uid://bfgk3rbip1ppr" path="res://Scenes/Player/move_component.gd" id="10_jhyir"]
+[ext_resource type="Script" uid="uid://btwg1wdbof3sf" path="res://Scripts/States/State.gd" id="10_oikmp"]
+[ext_resource type="PackedScene" uid="uid://dfpsxiiqn4x87" path="res://Scenes/Player/vine_grapple.tscn" id="11_74mp2"]
+[ext_resource type="PackedScene" uid="uid://dhvja2s2oo0xk" path="res://Scenes/Player/mech_grapple.tscn" id="13_06tpx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xpcdj"]
 animations = [{
@@ -80,5 +83,18 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 animation_name = "move"
 
+[node name="Swing" type="Node" parent="state_machine" unique_id=1435539636]
+script = ExtResource("10_oikmp")
+metadata/_custom_type_script = "uid://btwg1wdbof3sf"
+
 [node name="move_component" type="Node" parent="." unique_id=415871162]
 script = ExtResource("10_jhyir")
+
+[node name="vine_grapple" parent="." unique_id=1250737942 node_paths=PackedStringArray("player") instance=ExtResource("11_74mp2")]
+damping = 50.0
+max_displacement = 150
+player = NodePath("..")
+
+[node name="mech_grapple" parent="." unique_id=660355093 node_paths=PackedStringArray("player") instance=ExtResource("13_06tpx")]
+stiffness = 3000.0
+player = NodePath("..")

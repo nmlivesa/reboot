@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://euystmy8gsso"
 [autoload]
 
 SceneLoader="*uid://btqhy3xb0nkgj"
+GameManager="*uid://c0er2axulalcg"
 
 [display]
 

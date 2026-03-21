@@ -21,7 +21,7 @@ func process_physics(delta: float) -> State:
 		return idle_state
 	
 	parent.animations.flip_h = movement < 0
-	parent.velocity.x = movement
+	parent.velocity.x = lerp(parent.velocity.x, movement, acceleration)
 	parent.move_and_slide()
 	
 	if !parent.is_on_floor():
