@@ -21,6 +21,7 @@ func change_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
 	current_state = new_state
+	#print_debug("change_state to: ", new_state)
 	current_state.enter()
 	
 # Pass through functions for the Player to call,

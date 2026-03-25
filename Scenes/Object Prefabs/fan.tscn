@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://diaj3hug561wk"]
 
-[ext_resource type="Script" uid="uid://b02yr4uwyda3e" path="res://Scripts/fan.gd" id="1_7l2ec"]
+[ext_resource type="Script" uid="uid://b02yr4uwyda3e" path="res://Scenes/Object Prefabs/fan.gd" id="1_7l2ec"]
 [ext_resource type="Texture2D" uid="uid://40i5013nnewb" path="res://Art/Landscape Tiles Fixed Grid.png" id="1_8vgsl"]
 
 [sub_resource type="Curve" id="Curve_bfeh8"]
-_data = [Vector2(0, 0), 0.0, 3.1136074, 0, 0, Vector2(0.49367088, 0.9101124), 0.47980562, 0.47980562, 0, 0, Vector2(1, 0.9887641), -0.084025174, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 3.1136074, 0, 0, Vector2(0.5015106, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.9887641), -0.084025174, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7l2ec"]
@@ -31,6 +31,7 @@ initial_velocity_min = 600.0
 initial_velocity_max = 700.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=763086810]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1767444227]

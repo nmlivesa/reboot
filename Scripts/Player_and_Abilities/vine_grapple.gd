@@ -2,9 +2,14 @@ extends Node2D
 @export var rest_length = 2.0
 @export var stiffness = 10.0
 @export var damping = 2.0
+@export var cooldown_on_activate : bool = true
 @export var cooldown = 0.2
 @export var max_displacement = 30
 @export var player : CharacterBody2D
+@export var move_component : Node
+var look_dir : Vector2 = Vector2.ZERO
+
+signal enter_vine_swing
 
 @onready var ray := $RayCast2D
 @onready var rope := $Line2D
@@ -16,7 +21,11 @@ var target: Vector2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	ray.look_at(get_global_mouse_position())
+	look_dir = move_component.target_direction()
+	if look_dir:
+		ray.look_at(to_global(look_dir))
+	else:
+		ray.look_at(get_global_mouse_position())
 	
 	if grapple_ready && Input.is_action_just_pressed("grapple_vine"):
 		launch()
@@ -29,16 +38,18 @@ func _physics_process(delta: float) -> void:
 func launch():
 	if ray.is_colliding():
 		launched = true
+		enter_vine_swing.emit()
 		target = ray.get_collision_point()
 		rope.show()
 		grapple_ready = false
-		if (cooldown_timer.is_stopped()):
+		if (cooldown_on_activate && cooldown_timer.is_stopped()):
 			cooldown_timer.start()
 
 func retract():
 	launched = false
 	rope.hide()
-	
+	if (!cooldown_on_activate && cooldown_timer.is_stopped()):
+			cooldown_timer.start()
 
 func handle_grapple(delta):
 	var target_dir = player.global_position.direction_to(target)

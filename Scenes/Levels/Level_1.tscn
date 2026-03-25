@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bqv5grc4wgdj4"]
+
+[ext_resource type="Script" uid="uid://bd2js88btrhta" path="res://Scripts/level_manager.gd" id="1_87l2y"]
+[ext_resource type="PackedScene" uid="uid://c1l3wgx3str72" path="res://Scenes/Level Geometry/Level_1_Map.tscn" id="1_q8yj7"]
+[ext_resource type="PackedScene" uid="uid://dhk3qjo65qrqu" path="res://Scenes/Player/player.tscn" id="2_87l2y"]
+[ext_resource type="PackedScene" uid="uid://ceqjr0nxyst6a" path="res://Scenes/camera_director.tscn" id="3_qpfou"]
+
+[node name="Level_1" type="Node2D" unique_id=1932953186 node_paths=PackedStringArray("level_map_manager", "player", "camera_director")]
+script = ExtResource("1_87l2y")
+level_map_manager = NodePath("Level_1_Map")
+player = NodePath("player")
+camera_director = NodePath("Camera_Director")
+
+[node name="Level_1_Map" parent="." unique_id=1192107475 instance=ExtResource("1_q8yj7")]
+
+[node name="player" parent="." unique_id=1023718906 instance=ExtResource("2_87l2y")]
+position = Vector2(78, 990)
+
+[node name="Camera_Director" parent="." unique_id=1675280196 node_paths=PackedStringArray("cam", "target") instance=ExtResource("3_qpfou")]
+cam = NodePath("../Camera2D")
+target = NodePath("../player")
+follow_speed = 3.0
+target_offset = Vector2(0, -50)
+default_zoom = Vector2(1.15, 1.15)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=624762935]

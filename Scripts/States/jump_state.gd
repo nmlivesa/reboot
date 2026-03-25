@@ -12,7 +12,10 @@ var jump_force: float = 550.0
 
 func enter() -> void:
 	super()
-	parent.velocity.y = -jump_force
+	if parent.velocity.y < 0.0:
+		parent.velocity.y += -jump_force * 0.75
+	else:
+		parent.velocity.y = -jump_force
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y += gravity * delta
@@ -24,7 +27,7 @@ func process_physics(delta: float) -> State:
 	
 	if movement != 0:
 		parent.animations.flip_h = movement < 0
-		parent.velocity.x += movement * 0.5 * delta
+		parent.velocity.x += movement * 0.25 * delta
 	
 	parent.move_and_slide()
 	

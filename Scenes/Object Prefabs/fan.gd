@@ -1,8 +1,11 @@
 extends Node2D
 
 
+
 @export var push_force = 1500
 @export var falloff_curve : Curve
+
+
 @export var push_area_size = Vector2(1000, 200)
 
 
@@ -27,8 +30,8 @@ func _set_emitter_size():
 	emitter.emission_sphere_radius = emitter.emission_sphere_radius * (push_area_size.y / 200)
 	emitter.lifetime = emitter.lifetime * (push_area_size.x / 1000)
 	emitter.amount = emitter.amount * (push_area_size.x / 1000)
-	emitter.initial_velocity_min = emitter.initial_velocity_min * (push_force / 1500)
-	emitter.initial_velocity_max = emitter.initial_velocity_max * (push_force / 1500)
+	emitter.initial_velocity_min = emitter.initial_velocity_min * (push_force / 1500.0)
+	emitter.initial_velocity_max = emitter.initial_velocity_max * (push_force / 1500.0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if push_area_shape.shape.get_size() != push_area_size:

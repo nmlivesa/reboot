@@ -7,6 +7,9 @@ var idle_state: State
 @export
 var jump_state: State
 
+func _ready() -> void:
+	acceleration = 0.075
+	
 func process_input(event: InputEvent) -> State:
 	if get_jump() and parent.is_on_floor():
 		return jump_state

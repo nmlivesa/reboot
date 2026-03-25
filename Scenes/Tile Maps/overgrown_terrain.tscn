@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://csvukyu1u26jw"]
+
+[ext_resource type="TileSet" uid="uid://pdce34gg3evl" path="res://TileSets/Grass_Dirt_Concrete.tres" id="1_3ui77"]
+
+[node name="OvergrownTerrain" type="TileMapLayer" unique_id=1988503917]
+tile_set = ExtResource("1_3ui77")

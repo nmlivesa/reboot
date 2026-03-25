@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dt0gporbiju1a"]
+
+[ext_resource type="TileSet" uid="uid://bcwqca4224878" path="res://TileSets/Grass_Vegetation.tres" id="1_fpd5c"]
+
+[node name="Grass_Vegetation_Layer" type="TileMapLayer" unique_id=891898909]
+tile_set = ExtResource("1_fpd5c")

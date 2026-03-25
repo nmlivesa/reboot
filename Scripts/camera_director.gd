@@ -4,8 +4,8 @@ extends Node2D
 @export var target : Node2D
 @export var secondary_target : Node2D
 
-@export var follow_speed = 2
-@export var zoom_speed = 2
+@export var follow_speed = 2.0
+@export var zoom_speed = 2.0
 @export var target_offset = Vector2()
 
 @export var default_zoom = Vector2(1.0, 1.0)
@@ -28,6 +28,10 @@ func _process(delta: float) -> void:
 
 func FollowTarget(delta):
 	cam.position = cam.position.lerp(target.position + target_offset, follow_speed * delta)
+	
+
+func SetPosition(new_pos: Vector2):
+	cam.position = new_pos
 
 
 func AdjustZoom(delta):

@@ -28,7 +28,7 @@ animations = [{
 script = ExtResource("1_6tfko")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1622865982]
-target_position = Vector2(500, 0)
+target_position = Vector2(600, 0)
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1633564048]
 texture_repeat = 2

@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://mkvcycnmrn0u"]
+
+[ext_resource type="Texture2D" uid="uid://cmo2bi68dwbnh" path="res://Art/Backgrounds/Menu-Background.png" id="1_28flt"]
+[ext_resource type="Script" uid="uid://caosi0ygjcvc0" path="res://Scenes/main_menu.gd" id="1_48xlc"]
+[ext_resource type="Texture2D" uid="uid://da4v2on3gncqv" path="res://Art/Backgrounds/Main Title.png" id="3_1ehe0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48xlc"]
+texture = ExtResource("1_28flt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
+texture = ExtResource("3_1ehe0")
+
+[node name="Main_Menu" type="Control" unique_id=879929707]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+focus_neighbor_top = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+focus_neighbor_right = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+focus_neighbor_bottom = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+focus_next = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+focus_previous = NodePath("PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton")
+script = ExtResource("1_48xlc")
+
+[node name="Panel" type="Panel" parent="." unique_id=1889962913]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_48xlc")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=77660538]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ehe0")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=863948645]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 550
+theme_override_constants/margin_right = 550
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2144667663]
+layout_mode = 2
+theme_override_constants/separation = -165
+alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer2" unique_id=2068406556]
+custom_minimum_size = Vector2(300, 700)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ce3w2")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer2" unique_id=1113172206]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer_Main" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer" unique_id=1047371763]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="StartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main" unique_id=1870521659]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Start"
+
+[node name="LevelSelectButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main" unique_id=1085522513]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Level Select"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main" unique_id=1271536721]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Quit"
+
+[node name="VBoxContainer_Levels" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer" unique_id=1186844613]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Demo_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=359186961]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Demo Current"
+
+[node name="Level_2_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=156658253]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Level 2 (Unfinished)"
+
+[node name="Old_Demo_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=1061935161]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Demo Old"
+
+[node name="Back_to_Main_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=1631866008]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Main/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels/Demo_Button" to="." method="_on_demo_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels/Level_2_Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels/Old_Demo_Button" to="." method="_on_old_demo_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels/Back_to_Main_Button" to="." method="_on_back_to_main_button_pressed"]

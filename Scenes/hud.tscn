@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nur88uw7pki0"]
 
-[ext_resource type="Script" uid="uid://dxy7rcoefdr1l" path="res://Scripts/hud.gd" id="1_8sq4i"]
+[ext_resource type="Script" uid="uid://dxy7rcoefdr1l" path="res://Scripts/UI/hud.gd" id="1_8sq4i"]
 [ext_resource type="Texture2D" uid="uid://da4v2on3gncqv" path="res://Art/Backgrounds/Main Title.png" id="1_37p78"]
 
 [node name="HUD" type="CanvasLayer" unique_id=427176322]

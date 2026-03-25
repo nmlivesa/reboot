@@ -1,6 +1,11 @@
 class_name Player
 extends CharacterBody2D
 
+@export
+var vine_swing : State
+@export
+var mech_swing : State
+
 @onready
 var animations = $animations
 @onready 
@@ -19,3 +24,11 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+
+
+func _on_vine_grapple_enter_vine_swing() -> void:
+	state_machine.change_state(vine_swing)
+
+
+func _on_mech_grapple_enter_mech_swing() -> void:
+	state_machine.change_state(mech_swing)

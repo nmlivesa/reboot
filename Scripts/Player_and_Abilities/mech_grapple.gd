@@ -1,23 +1,28 @@
 extends Node2D
 
 
-@export var rest_length = 1.0
-@export var stiffness = 1000.0
+@export var release_distance = 100.0
+@export var stiffness = 1500.0
 @export var damping = 2.0
-@export var unlatch_delay = 0.01
+@export var unlatch_delay = 1.25
 @export var cooldown = 3.0
 @export var player : CharacterBody2D
+@export var move_component : Node
+var look_dir : Vector2 = Vector2.ZERO
 
-@onready var ray := $RayCast2D
-@onready var rope := $Line2D
-@onready var hand := $AnimatedSprite2D
+signal enter_mech_swing
+
+@onready var ray : RayCast2D = $RayCast2D
+@onready var rope : Line2D = $Line2D
+@onready var hand : AnimatedSprite2D = $AnimatedSprite2D
 @onready var cooldown_timer := $GrappleCooldownTimer
 @onready var unlatch_timer := $GrappleUnlatchTimer
 
 var launched = false
 var grapple_ready = true
-var release = false
-var target: Vector2
+#var release = false
+var target: Vector2 = Vector2.ZERO
+var target_normal: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	hand.hide()
@@ -27,11 +32,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	ray.look_at(get_global_mouse_position())
-	
+	if !launched:
+		look_dir = move_component.target_direction()
+		if look_dir:
+			ray.look_at(to_global(look_dir))
+		else:
+			ray.look_at(get_global_mouse_position())
+		if ray.is_colliding():
+			target = ray.get_collision_point()
+			target_normal = ray.get_collision_normal()
 	if grapple_ready && Input.is_action_just_pressed("grapple_mech"):
 		launch()
-	if release && (Input.is_action_just_released("grapple_mech")|| Input.is_action_just_pressed("grapple_mech")): 
+	if (Input.is_action_just_released("grapple_mech")): 
 		#ready to unlatch and key just pressed or released
 		retract()
 	if launched:
@@ -40,13 +52,16 @@ func _physics_process(delta: float) -> void:
 		grapple_indicator()
 
 func launch():
-	if ray.is_colliding():
-		launched = true
+	if player.global_position.distance_to(target) < ray.target_position.x:
+		ray.look_at(target)
+		ray.force_raycast_update()
 		target = ray.get_collision_point()
+		launched = true
+		enter_mech_swing.emit()
 		rope.show()
 		hand.show()
 		grapple_ready = false
-		release = false
+		#release = false
 		unlatch_timer.start()
 
 func retract():
@@ -57,10 +72,10 @@ func retract():
 		cooldown_timer.start()
 
 func grapple_indicator():
-	if  grapple_ready && ray.is_colliding():
+	if  grapple_ready && player.global_position.distance_to(target) < ray.target_position.x:
 		hand.show()
-		hand.position = to_local(ray.get_collision_point())
-		hand.rotation = (-ray.get_collision_normal()).angle() # - sign must be inside parenthesis
+		hand.position = to_local(target)
+		hand.rotation = (-target_normal).angle() # - sign must be inside parenthesis
 	else:
 		hand.hide()
 
@@ -68,7 +83,7 @@ func handle_grapple(delta):
 	var target_dir = player.global_position.direction_to(target)
 	var target_dist = player.global_position.distance_to(target)
 	
-	var displacement = target_dist - rest_length
+	var displacement = target_dist - release_distance
 	
 	var force = Vector2.ZERO
 	
@@ -80,6 +95,8 @@ func handle_grapple(delta):
 		var damping_applied = -damping * vel_dot * target_dir
 		
 		force = spring_force + damping_applied
+	else:
+		retract()
 	
 	player.velocity += force * delta
 	update_rope()
@@ -91,8 +108,8 @@ func update_rope():
 
 
 func _on_unlatch_timer_timeout() -> void:
-	release = true
-
+	#release = true
+	retract()
 
 func _on_cooldown_timer_timeout() -> void:
 	grapple_ready = true

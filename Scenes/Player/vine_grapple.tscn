@@ -5,9 +5,10 @@
 
 [node name="vine_grapple" type="Node2D" unique_id=1250737942]
 script = ExtResource("1_8bhvb")
+damping = 50.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=395480607]
-target_position = Vector2(800, 0)
+target_position = Vector2(900, 0)
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1065521390]
 texture_repeat = 2

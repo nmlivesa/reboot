@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dw8dvhmvmld6o"]
 
-[ext_resource type="Script" uid="uid://b8wvv265fbrbx" path="res://Scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b8wvv265fbrbx" path="res://Scripts/Kinematic_Player(old)/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://doi6ay4ibgdnk" path="res://Scenes/Player/kinematic_player.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://ceqjr0nxyst6a" path="res://Scenes/camera_director.tscn" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://nur88uw7pki0" path="res://Scenes/hud.tscn" id="3_lquwl"]
-[ext_resource type="PackedScene" uid="uid://jfvqkoyo12rg" path="res://Scenes/Levels/tiles.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://jfvqkoyo12rg" path="res://Scenes/Level Geometry/tiles.tscn" id="4_jjvhh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
 size = Vector2(453, 335.5)
@@ -49,7 +49,6 @@ target = NodePath("../Kinematic_Player")
 default_zoom = Vector2(0.9, 0.9)
 
 [node name="Kinematic_Player" parent="." unique_id=701945916 instance=ExtResource("2_1bvp3")]
-z_index = 0
 position = Vector2(579, 493)
 metadata/_edit_group_ = true
 
