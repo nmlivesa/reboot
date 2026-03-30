@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 
@@ -14,8 +14,22 @@ func wants_jump() -> bool:
 	return Input.is_action_just_pressed('jump')
 
 
-func target_direction() -> Vector2:
-	var direction = Input.get_vector("target_left","target_right","target_up","target_down")
+func target_direction(player_pos: Vector2) -> Vector2:
+	if Input.get_vector("target_left","target_right","target_up","target_down"):
+		return Input.get_vector("target_left","target_right","target_up","target_down")
+	elif Input.get_vector("target2_left","target2_right","target2_up","target2_down"):
+		return Input.get_vector("target2_left","target2_right","target2_up","target2_down")
+	else:
+		return player_pos.direction_to(get_global_mouse_position())
 
-	return direction
+func ability_main() -> bool:
+	return Input.is_action_pressed("ability_main")
 	
+func ability_main_released() -> bool:
+	return Input.is_action_just_released("ability_main")
+
+func ability_secondary() -> bool:
+	return Input.is_action_pressed("ability_secondary")
+
+func ability_secondary_released() -> bool:
+	return Input.is_action_just_released("ability_secondary")

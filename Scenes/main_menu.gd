@@ -22,7 +22,6 @@ func _on_level_select_button_pressed() -> void:
 	levelButtons.show()
 
 
-
 #Level Select Buttons
 func _on_demo_button_pressed() -> void:
 	SceneLoader.load_scene("res://Scenes/Levels/test_new_player.tscn")

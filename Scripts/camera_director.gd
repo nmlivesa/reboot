@@ -41,25 +41,25 @@ func SetZoom(new_zoom: Vector2):
 	zoom = new_zoom
 
 
-func _on_room_3_cave_outer_body_entered(body: Node2D) -> void:
+func _on_room_3_cave_outer_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(0.65, 0.65))
 
 
-func _on_room_4_floating_tiles_body_entered(body: Node2D) -> void:
+func _on_room_4_floating_tiles_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(0.45, 0.45))
 
 
-func _on_room_5_final_body_entered(body: Node2D) -> void:
+func _on_room_5_final_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(0.35, 0.35))
 
 
-func _on_room_transition_2_body_entered(body: Node2D) -> void:
+func _on_room_transition_2_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(0.9, 0.9))
 
 
-func _on_room_transition_opening_body_entered(body: Node2D) -> void:
+func _on_room_transition_opening_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(1, 1))
 
 
-func _on_room_1_menu_spot_body_entered(body: Node2D) -> void:
+func _on_room_1_menu_spot_body_entered(_body: Node2D) -> void:
 	SetZoom(Vector2(1, 1))

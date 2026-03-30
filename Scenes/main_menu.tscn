@@ -97,7 +97,7 @@ text = "Demo Current"
 [node name="Level_2_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=156658253]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Level 2 (Unfinished)"
+text = "Level 2"
 
 [node name="Old_Demo_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer2/MarginContainer/VBoxContainer_Levels" unique_id=1061935161]
 custom_minimum_size = Vector2(0, 50)

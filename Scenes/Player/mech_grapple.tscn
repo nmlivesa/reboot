@@ -41,7 +41,7 @@ z_index = 1
 z_as_relative = false
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_ggc45")
-animation = &"Grabbed"
+animation = &"Open"
 
 [node name="GrappleCooldownTimer" type="Timer" parent="." unique_id=919000228]
 one_shot = true

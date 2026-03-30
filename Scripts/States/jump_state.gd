@@ -18,7 +18,7 @@ func enter() -> void:
 		parent.velocity.y = -jump_force
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * delta
+	parent.velocity += parent.get_gravity() * delta
 	
 	if parent.velocity.y > 0:
 		return fall_state

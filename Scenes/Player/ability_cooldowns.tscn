@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://dteqpn4typxvy"]
+
+[ext_resource type="Script" uid="uid://203bgjhiomcc" path="res://Scenes/Player/ability_cooldowns.gd" id="1_gorlr"]
+[ext_resource type="Texture2D" uid="uid://b2lms2tgqguhr" path="res://Art/Vines/Spiral%20Asset.png" id="1_haspt"]
+[ext_resource type="Texture2D" uid="uid://b64u8615kvn2y" path="res://Art/Character Art/Grapple/Grapple%20Hand%20Open.png" id="2_gorlr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gorlr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vaucf"]
+texture = ExtResource("1_haspt")
+
+[sub_resource type="DPITexture" id="DPITexture_gorlr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ha2rp"]
+texture = SubResource("DPITexture_gorlr")
+modulate_color = Color(0.18039216, 0.18039216, 0.18039216, 0.6392157)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxuec"]
+texture = ExtResource("2_gorlr")
+
+[node name="Ability Cooldowns" type="Control" unique_id=4426617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gorlr")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1931268059]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -200.0
+offset_right = 160.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_gorlr")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=258019250]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1057205268]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1872069852]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel_Vine" type="Panel" parent="PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=2070826779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_vaucf")
+
+[node name="Panel_Vine_Shaded" type="Panel" parent="PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=1175363569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ha2rp")
+
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1593000921]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel_Mech" type="Panel" parent="PanelContainer/MarginContainer/HBoxContainer/Control2" unique_id=868737284]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_oxuec")
+
+[node name="Panel_Mech_Shaded" type="Panel" parent="PanelContainer/MarginContainer/HBoxContainer/Control2" unique_id=1709529549]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ha2rp")

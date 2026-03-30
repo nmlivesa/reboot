@@ -7,16 +7,18 @@ var idle_state: State
 @export
 var jump_state: State
 
-func _ready() -> void:
-	acceleration = 0.075
+var since_ground_contact : float = 0.0
+
+#func _ready() -> void:
+	#acceleration = 0.075
 	
-func process_input(event: InputEvent) -> State:
-	if get_jump() and parent.is_on_floor():
+func process_input(_event: InputEvent) -> State:
+	if get_jump(): # and parent.is_on_floor()
 		return jump_state
 	return null
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * delta
+	parent.velocity += parent.get_gravity() * delta
 	
 	var movement = get_movement_input() * move_speed
 	
@@ -28,5 +30,10 @@ func process_physics(delta: float) -> State:
 	parent.move_and_slide()
 	
 	if !parent.is_on_floor():
-		return fall_state
+		since_ground_contact += delta
+		if since_ground_contact > coyote_time:
+			return fall_state
+	else:
+		since_ground_contact = 0.0
+	
 	return null

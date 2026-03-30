@@ -36,6 +36,8 @@ func _set_emitter_size():
 func _ready() -> void:
 	if push_area_shape.shape.get_size() != push_area_size:
 		_set_area_size()
+	#push_area.gravity = push_force # could be used to change gravity in area.
+	#push_area.gravity_direction = direction_vector
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -21,7 +21,7 @@ func exit() -> void:
 	#print_debug(parent.velocity)
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * 0.2 * delta
+	parent.velocity += parent.get_gravity() * 0.25 * delta
 	
 	if !mech_grapple.launched:
 		return fall_state

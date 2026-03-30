@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://nyy3p13t7y4r" path="res://Scripts/States/mech_swing_state.gd" id="11_7g0yx"]
 [ext_resource type="PackedScene" uid="uid://dfpsxiiqn4x87" path="res://Scenes/Player/vine_grapple.tscn" id="11_74mp2"]
 [ext_resource type="PackedScene" uid="uid://dhvja2s2oo0xk" path="res://Scenes/Player/mech_grapple.tscn" id="13_06tpx"]
+[ext_resource type="PackedScene" uid="uid://dteqpn4typxvy" path="res://Scenes/Player/ability_cooldowns.tscn" id="15_dey5f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xpcdj"]
 animations = [{
@@ -87,6 +88,7 @@ fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 animation_name = "move"
+acceleration = 0.075
 
 [node name="Vine_Swing" type="Node" parent="state_machine" unique_id=1435539636 node_paths=PackedStringArray("jump_state", "fall_state", "idle_state", "move_state", "vine_grapple")]
 script = ExtResource("10_06tpx")
@@ -95,6 +97,7 @@ fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 vine_grapple = NodePath("../../vine_grapple")
+animation_name = "idle"
 metadata/_custom_type_script = "uid://btwg1wdbof3sf"
 
 [node name="Mech_Swing" type="Node" parent="state_machine" unique_id=618334414 node_paths=PackedStringArray("jump_state", "fall_state", "idle_state", "move_state", "mech_grapple")]
@@ -107,13 +110,14 @@ mech_grapple = NodePath("../../mech_grapple")
 animation_name = "idle"
 metadata/_custom_type_script = "uid://btwg1wdbof3sf"
 
-[node name="move_component" type="Node" parent="." unique_id=415871162]
+[node name="move_component" type="Node2D" parent="." unique_id=442954080]
 script = ExtResource("10_jhyir")
 
 [node name="vine_grapple" parent="." unique_id=1250737942 node_paths=PackedStringArray("player", "move_component") instance=ExtResource("11_74mp2")]
+length_offset = 100.0
 stiffness = 20.0
 cooldown_on_activate = false
-cooldown = 1.5
+cooldown = 1.0
 max_displacement = 150
 player = NodePath("..")
 move_component = NodePath("../move_component")
@@ -124,5 +128,13 @@ stiffness = 2000.0
 player = NodePath("..")
 move_component = NodePath("../move_component")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481047052]
+
+[node name="Ability Cooldowns" parent="CanvasLayer" unique_id=4426617 instance=ExtResource("15_dey5f")]
+
 [connection signal="enter_vine_swing" from="vine_grapple" to="." method="_on_vine_grapple_enter_vine_swing"]
+[connection signal="enter_vine_swing" from="vine_grapple" to="CanvasLayer/Ability Cooldowns" method="_vine_ability_activated"]
+[connection signal="start_cooldown" from="vine_grapple" to="CanvasLayer/Ability Cooldowns" method="_vine_start_cooldown"]
 [connection signal="enter_mech_swing" from="mech_grapple" to="." method="_on_mech_grapple_enter_mech_swing"]
+[connection signal="enter_mech_swing" from="mech_grapple" to="CanvasLayer/Ability Cooldowns" method="_mech_ability_activated"]
+[connection signal="start_cooldown" from="mech_grapple" to="CanvasLayer/Ability Cooldowns" method="_mech_start_cooldown"]

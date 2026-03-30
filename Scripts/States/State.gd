@@ -7,6 +7,8 @@ var animation_name: String
 var move_speed: float = 350
 @export
 var acceleration: float = 0.1
+@export
+var coyote_time : float = 0.25
 
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -22,13 +24,13 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
 
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	return null
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	return null
 
 func get_movement_input() -> float:

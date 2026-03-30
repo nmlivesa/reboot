@@ -7,17 +7,21 @@ var idle_state: State
 @export
 var move_state: State
 @export 
-var jump_buffer : float = 0.25
+var jump_buffer : float = 2.0
+
 
 var time_since_jump_pressed: float = jump_buffer
 
-func process_input(event: InputEvent) -> State:
+func exit() -> void:
+	time_since_jump_pressed = jump_buffer
+
+func process_input(_event: InputEvent) -> State:
 	if get_jump():
 		time_since_jump_pressed = 0
 	return null
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * delta
+	parent.velocity += parent.get_gravity() * delta
 	time_since_jump_pressed += delta
 
 	var movement = get_movement_input() * move_speed
